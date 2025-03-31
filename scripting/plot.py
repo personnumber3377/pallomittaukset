@@ -8,7 +8,7 @@ ok, so the first run was filmed with 138.8 fps
 '''
 
 import matplotlib.pyplot as plt
-
+import numpy as np
 
 def load_data():
 	import csv
@@ -52,6 +52,14 @@ def main():
 	plt.plot(time_stuff, ball1, label='Object 1')
 	plt.plot(time_stuff, ball2, label='Object 2')
 
+	# Use numpy.gradient to estimate derivative
+	speed_even = np.gradient(ball1, time_stuff)
+	speed_odd = np.gradient(ball2, time_stuff)
+
+	# Plot the speed
+	plt.plot(time_stuff, speed_even, label="Speed of Object 1 (even)")
+	plt.plot(time_stuff, speed_odd, label="Speed of Object 2 (odd)")
+	
 	plt.xlabel("Time (seconds)")
 	plt.ylabel("Position")
 	plt.title("Position Over Time")
